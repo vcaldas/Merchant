@@ -23,4 +23,37 @@ services:
         image: redis
         restart: unless-stopped
 
-        
+    mlflow-db:
+        image: postgres:13
+        restart: unless-stopped
+        environment:
+            POSTGRES_USER=: ${POSTGRES_USER}
+            POSTGRES_PASSWORD=: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: mlflow_backend_store_db
+            PGDATA: /var/lib/postgresql/data/pgdata
+        volumes:
+        - ./storage/mlflow_data:/var/lib/postgresql/data/pgdata
+
+    airflow-db:
+        image: postgres:13
+        restart: unless-stopped
+        environment:
+            POSTGRES_USER=: ${POSTGRES_USER}
+            POSTGRES_PASSWORD=: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: airflow_backend_store_db
+            PGDATA: /var/lib/postgresql/data/pgdata
+        volumes:
+        - ./storage/airflow_data:/var/lib/postgresql/data/pgdata
+        ports:
+        - "5433:5432"
+
+    pgadmin:
+        image: dpage/pgadmin4
+        restart: unless-stopped
+        environment:
+            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+        volumes:
+        - ./storage/pgadmin_data/:/var/lib/pgadmin
+        ports:
+        - "5050:80"
