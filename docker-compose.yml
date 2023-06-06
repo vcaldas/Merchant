@@ -18,3 +18,9 @@ services:
         command: server --console-address ":9001" /data/
         volumes: 
             - ./Storage/minio_storage:/data
+
+    redis:
+        image: redis
+        restart: unless-stopped
+
+        
