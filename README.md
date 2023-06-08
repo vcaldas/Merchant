@@ -22,18 +22,12 @@ Another Python trading bot
 Cannot guarantee that it will work. Still solving many gotchas,
 
 1. Downlod/Clone the Github Repository (current)
-2. Run docker compose, to start with 5 celery workers:  
- ```docker-compose up -d --scale worker=5```  
-First run would take some time as all the Docker base images need to be downloaded.  
-Once its is running, you can access the following components from the webaddress
-    * Dash Web-app:<http://localhost:8050>
-    * Jupyter Lab:<http://localhost:8888>
-    * Airflow: <http://localhost:8080>
-    * MLflow: <http://localhost:5500>
-    * PgAdmin: <http://localhost:1234>
-    * Minio: <http://localhost:9000>
-    * Flask Restful ETL Server: <http://localhost:8060>
-    * Nginx Reverse Proxy Server: <http://localhost:80>
+2. Configurations:
+   1. The environmental configurations are in the ```.env```file. An example is provided.
+3. Run docker compose, to start with 5 celery workers:  
+ ```docker-compose up```  
+
+    * Minio: <http://localhost:9001>
 
 # Current Status
 
