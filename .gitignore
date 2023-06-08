@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
+# Development data is not needed.
+Storage/minio_storage/
 # C extensions
 *.so
 
