@@ -2,6 +2,8 @@
 
 Another Python trading bot
 
+I am writting about it in (Substack)[https://victorcaldas.substack.com/?utm_source=substack&utm_medium=web&utm_campaign=substack_profile]
+
 ## Why another tool?
 
     I wanted to learn more about infra and trading and none of the tools was fitting exactly my case.
