@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "merchant"
+version = "0.1.0"
+description = "Trading App"
+authors = ["Victor Caldas <victor_caldas@cargill.com>"]
+readme = "README.md"
+packages = [
+    { include = "merchant", from = "src" },
+]
+include = [
+    "src/merchant",
+    "*.txt",
+     "*.sh",
+    "*.md"
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.scripts]
+merchant = "merchant.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+log_cli = true
+log_cli_level = "INFO"
+testpaths = "tests"
+xfail_strict = true
+
+[tool.coverage.run]
+parallel = true
+source = [
+    "src/merchant"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    'if __name__ == "__main__":',
+    "if TYPE_CHECKING:",
+]
+
+# Optional development dependencies
+coverage = { extras = ["toml"], version = "^5.5", optional = true }
+mypy = { version = "1.3.0", optional = true }
+pre-commit = { version = "^2.14.0", optional = true }
+pyment = { version = "^0.3.3", optional = true }
+tox = { version = "^3.24.3", optional = true }
