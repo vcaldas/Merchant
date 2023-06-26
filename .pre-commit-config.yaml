@@ -1,32 +1,35 @@
-fail_fast: true
-
 repos:
-  - repo: local
+  - repo: https://github.com/pycqa/isort
+    rev: 5.11.5
     hooks:
-      - id: lint
-        name: lint
-        entry: bash scripts/lint.sh
-        language: system
-        files: ^src/merchant/|^tests/|^examples/
-        types: [file, python]
-        pass_filenames: false
-
-  - repo: local
+      - id: isort
+        stages: [push]
+        args: ["--check-only", "--diff", "--profile", "black"]
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
     hooks:
-      - id: docstringcheck
-        name: docstringcheck
-        entry: bash scripts/docstring.sh
-        language: system
-        files: ^src/merchant/
-        types: [file, python]
-        pass_filenames: false
-
+      - id: black
+        language_version: python3.10
+        stages: [push]
+        args: ["--check", "--diff", "--color"]
+  - repo: https://github.com/pycqa/flake8
+    rev: 4.0.1
+    hooks:
+      - id: flake8
+        stages: [push]
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.942
+    hooks:
+      - id: mypy
+        stages: [push]
+        args: [--show-error-codes]
+        additional_dependencies: ['types-requests']
   - repo: local
     hooks:
       - id: pytest
-        name: pytest
-        entry: bash scripts/test-coverage-xml.sh unit
+        name: run unit tests
+        entry: pytest --suppress-no-test-exit-code
         language: system
-        files: ^src/merchant/|^tests/
-        types: [file, python]
+        types: [python]
+        stages: [push]
         pass_filenames: false
