@@ -1,0 +1,6 @@
+aiohttp==3.8.2
+python-dotenv
+alpaca-py
+fastapi
+uvicorn
+jinja2
