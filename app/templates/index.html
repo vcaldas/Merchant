@@ -3,26 +3,37 @@
 
 {% block content %}
 <h1>Stocks List</h1>
-        <table class="ui striped table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Symbol</th>
-                <th class="left aligned">Name</th>
-            </tr>
-            </thead>
-        <tbody>
-        {% for stock in stocks %}
-        
- 
-        <tr>
-            <td>{{ stock.id }} </td>
-            <td>{{ stock.symbol }}</td>
-            <td><a href="/stock/{{stock.symbol}}"> {{stock.name }}</a></td>
-        </tr>
-            
-        {% endfor  %}
-        </tbody>
+<form method="get">
+    <select name="filter" id="">
+        <option value="">All stocks</option>
+        <option value="new_intraday_highs">New Intraday Highs</option>
+        <option value="new_closing_highs">New Closing Highs</option>
+        <option value="new_intraday_lows">New Intraday lows</option>
+        <option value="new_closing_lows">New Closing lows</option>
+    </select>
+    <input type="submit" name="" id=""/>
+</form>
 
-        </table>
+<table class="ui striped table">
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>Symbol</th>
+        <th class="left aligned">Name</th>
+    </tr>
+    </thead>
+<tbody>
+{% for stock in stocks %}
+
+
+<tr>
+    <td>{{ stock.id }} </td>
+    <td>{{ stock.symbol }}</td>
+    <td><a href="/stock/{{stock.symbol}}"> {{stock.name }}</a></td>
+</tr>
+    
+{% endfor  %}
+</tbody>
+
+</table>
 {% endblock %}

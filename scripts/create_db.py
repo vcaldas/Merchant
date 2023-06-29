@@ -36,11 +36,24 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS stock_price (
     volume NOT NULL,
     vwap NOT NULL,
     FOREIGN KEY (stock_id) REFERENCES stock(id)
-)"""
-               )
+)""")
+
+# Create database
+cursor.execute("""CREATE TABLE IF NOT EXISTS strategy (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+)""")
+
+# Create database
+cursor.execute("""CREATE TABLE IF NOT EXISTS stock_strategy (
+    stock_id INTEGER NOT NULL,
+    strategy_id INTEGER NOT NULL,
+    FOREIGN KEY (stock_id) REFERENCES stock(id),
+    FOREIGN KEY (strategy_id) REFERENCES strategy(id)
+)""")
 connection.commit()
 
-cursor.execute("""SELECT symbol,name from stock""")
+cursor.execute("""SELECT symbol ,name from stock""")
 
 rows = cursor.fetchall()
 symbols = [row[0] for row in rows]
@@ -55,5 +68,23 @@ for asset in assets:
         except Exception as e:
             print(e)
             print(asset.name, asset.symbol)
+
+connection.commit()
+
+
+cursor.execute("""SELECT symbol ,name from stock""")
+
+rows = cursor.fetchall()
+symbols = [row[0] for row in rows]
+print(f'There are {len(symbols)} stocks available')
+
+
+# adding example strategies
+strategies = ['opening_range_breakout', 'opening_range_breakdown']
+
+for strategy in strategies:
+    cursor.execute("""
+            INSERT INTO strategy (name) VALUES (?)
+            """, (strategy,))
 
 connection.commit()

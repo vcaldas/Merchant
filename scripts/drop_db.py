@@ -1,5 +1,4 @@
 import sqlite3
-import alpaca_trade_api as tradeapi
 import os
 from dotenv import load_dotenv
 
