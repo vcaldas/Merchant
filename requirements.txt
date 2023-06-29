@@ -4,3 +4,5 @@ alpaca-py
 fastapi
 uvicorn
 jinja2
+typer[all]
+python-multipart
